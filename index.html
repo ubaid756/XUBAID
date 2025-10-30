@@ -1,339 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UBAID XCGPT STORE - Modern E-commerce</title>
-<style>
-  /* Reset and base */
-  * { box-sizing: border-box; }
-  body, html {
-    margin: 0; padding: 0;
-    font-family: 'Poppins', 'Inter', sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  a { text-decoration: none; color: inherit; }
-
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 240px;
-    height: 100vh;
-    background: #0073c8;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-top: 2rem;
-    z-index: 1001;
-  }
-  .sidebar a {
-    padding: 1rem 2rem;
-    font-weight: 600;
-    border-left: 4px solid transparent;
-    transition: background 0.3s, border-color 0.3s;
-  }
-  .sidebar a:hover, .sidebar a.active {
-    background: #005ea0;
-    border-left-color: #ffd700;
-  }
-
-  /* Main content */
-  .main-content {
-    margin-left: 240px;
-    padding: 1rem 2rem;
-    min-height: 100vh;
-  }
-
-  /* Header */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 0 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1002;
-  }
-  header .logo {
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: #0073c8;
-    cursor: pointer;
-  }
-  header .cart-btn {
-    background: #ffd700;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    position: relative;
-  }
-  header .cart-btn:hover {
-    background: #e6c200;
-  }
-  header .cart-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #d9534f;
-    color: white;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-weight: 700;
-  }
-
-  main {
-    margin-top: 1rem;
-  }
-
-  /* Products Grid */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-
-  /* Product Cards */
-  .product-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  }
-  .product-card:hover {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  }
-  .product-img {
-    height: 180px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-  .category {
-    font-size: 0.75rem;
-    color: #777;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-  .product-name {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-  }
-  .product-desc {
-    flex-grow: 1;
-    margin-bottom: 0.7rem;
-  }
-  .price {
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: #d9534f;
-  }
-  .old-price {
-    font-weight: 400;
-    font-size: 0.9rem;
-    color: #999;
-    text-decoration: line-through;
-    margin-left: 0.5rem;
-  }
-  .btn {
-    background: #ffd700;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 10px;
-    font-weight: 700;
-    color: #111;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 1rem;
-  }
-  .btn:hover {
-    background: #e6c200;
-  }
-
-  /* Cart Sidebar */
-  #cartSidebar {
-    position: fixed;
-    right: -420px;
-    top: 0;
-    width: 400px;
-    height: 100vh;
-    background: white;
-    box-shadow: -3px 0 15px rgba(0,0,0,0.3);
-    padding: 1rem;
-    overflow-y: auto;
-    z-index: 1003;
-    transition: right 0.3s ease;
-  }
-  #cartSidebar.open {
-    right: 0;
-  }
-  #closeCartBtn {
-    position: absolute;
-    top: 0.8rem;
-    right: 1rem;
-    background: transparent;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-  #cartSidebar h2 {
-    text-align: center;
-    margin-top: 0;
-  }
-  .cart-item {
-    border-bottom: 1px solid #ddd;
-    padding: 1rem 0;
-  }
-  .cart-item:last-child {
-    border-bottom: none;
-  }
-  .cart-item-name {
-    font-weight: 700;
-  }
-  .cart-item-controls {
-    margin-top: 0.5rem;
-  }
-  .qty-btn {
-    padding: 0 10px;
-    cursor: pointer;
-    font-weight: 700;
-    margin-right: 5px;
-  }
-  #cartTotal {
-    font-weight: 800;
-    font-size: 1.3rem;
-    margin-top: 1rem;
-    text-align: center;
-  }
-  #paymentButtons {
-    margin-top: 1rem;
-    text-align: center;
-  }
-  #paymentButtons button {
-    background-color: #0073c8;
-    color: white;
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 12px;
-    margin: 0 0.5rem;
-    cursor: pointer;
-    font-weight: 700;
-  }
-  #paymentButtons button:hover {
-    background-color: #005ea0;
-  }
-  /* Footer */
-  footer {
-    text-align: center;
-    background: #222;
-    color: #ffd700;
-    padding: 1rem 2rem;
-    font-weight: 600;
-    margin-top: 3rem;
-  }
-
-  /* Responsive */
-  @media(max-width: 768px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UBAID XCGPT STORE - Modern E-commerce</title>
+  <style>
+    *{box-sizing:border-box;}
+    body, html {
+      font-family: 'Poppins', 'Inter', sans-serif;
+      margin:0;padding:0;
+      background-color:#f7f7f7;
+      color:#222;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit;}
     .sidebar {
-      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 240px; height: 100vh;
+      background: #0073c8; color: #fff;
+      display:flex;flex-direction:column;gap:1rem;
+      padding-top:2rem;z-index:1001;
     }
-    .main-content {
-      margin: 0;
-      padding: 1rem;
+    .sidebar a {
+      padding: 1rem 2rem; font-weight:600;
+      border-left:4px solid transparent;
+      transition:background 0.3s, border-color 0.3s;
     }
+    .sidebar a:hover, .sidebar a.active{background:#005ea0;border-left-color:#ffd700;}
+    .main-content{margin-left:240px;padding:1rem 2rem;}
+    header {
+      display:flex;justify-content:space-between;align-items:center;
+      height:60px;background:#fff;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:0 1rem;position:sticky;top:0;
+      z-index:1002;
+    }
+    header .logo {font-weight:800;font-size:1.3rem;color:#0073c8;cursor:pointer;}
+    header .cart-btn {
+      background:#ffd700;border:none;
+      padding:0.5rem 1rem;
+      border-radius:6px;font-weight:700;
+      font-size:1rem;cursor:pointer;position:relative;
+    }
+    header .cart-count {
+      position:absolute;top:-8px;right:-8px;
+      background:#d9534f;color:white;font-size:12px;
+      padding:2px 6px;border-radius:50%;font-weight:700;
+    }
+    .products-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+    .product-card {
+      background:#fff;border-radius:12px;padding:1rem;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      display:flex;flex-direction:column;cursor:pointer;
+      transition:box-shadow 0.3s ease;
+    }
+    .product-card:hover {box-shadow:0 6px 18px rgba(0,0,0,0.15);}
+    .product-img {height:180px;object-fit:contain;border-radius:8px;margin-bottom:1rem;}
+    .category {font-size:0.85rem;color:#777;text-transform:uppercase;margin-bottom:0.5rem;font-weight:600;}
+    .product-name {font-weight:700;font-size:1.1rem;margin-bottom:0.3rem;}
+    .product-desc {flex-grow:1;margin-bottom:0.7rem;}
+    .price {font-weight:800;font-size:1.2rem;color:#d9534f;}
+    .old-price {font-weight:400;font-size:0.9rem;color:#999;text-decoration:line-through;margin-left:0.5rem;}
+    .btn {
+      background:#ffd700;border:none;padding:0.7rem;
+      border-radius:10px;font-weight:700;color:#111;cursor:pointer;
+      transition:background 0.3s ease;margin-top:1rem;
+    }
+    .btn:hover {background:#e6c200;}
     #cartSidebar {
-      width: 100vw;
-      right: -100vw;
+      position:fixed;right:-420px;top:0;width:400px;height:100vh;
+      background:white;box-shadow:-3px 0 15px rgba(0,0,0,0.3);padding:1rem;overflow-y:auto;
+      z-index:1003;transition:right 0.3s ease;
     }
-    #cartSidebar.open {
-      right: 0;
+    #cartSidebar.open {right:0;}
+    #closeCartBtn {
+      position:absolute;top:0.8rem;right:1rem;background:transparent;border:none;font-size:1.8rem;cursor:pointer;
     }
-  }
-</style>
+    #cartSidebar h2 {text-align:center;margin-top:0;}
+    .cart-item {border-bottom:1px solid #ddd;padding:1rem 0;}
+    .cart-item:last-child {border-bottom:none;}
+    .cart-item-name {font-weight:700;}
+    .cart-item-controls {margin-top:0.5rem;}
+    .qty-btn {padding:0 10px;cursor:pointer;font-weight:700;margin-right:5px;}
+    #cartTotal {font-weight:800;font-size:1.3rem;margin-top:1rem;text-align:center;}
+    #paymentButtons {margin-top:1rem;text-align:center;}
+    #paymentButtons button {
+      background-color:#0073c8;color:white;padding:0.7rem 1.5rem;
+      border:none;border-radius:12px;margin:0 0.5rem;cursor:pointer;font-weight:700;
+    }
+    #paymentButtons button:hover {background-color:#005ea0;}
+    .customer-service {
+      margin-top:2.5rem;
+      background:#eef6fd;
+      border-radius:12px;
+      padding:2rem;
+      box-shadow:0 1px 6px rgba(0, 115, 200, 0.07);
+    }
+    .faq-list {margin-top:1.5rem;}
+    .faq-list li{margin-bottom:1rem;}
+    form {max-width:400px;margin:2rem auto;display:flex;flex-direction:column;}
+    form label {margin-bottom:0.5rem;}
+    form input,form textarea {
+      padding:0.7rem;margin-bottom:1rem;border-radius:8px;border:1px solid #bbb;font-size:1rem;
+    }
+    form button {background:#0073c8;color:white;padding:0.7rem 1.3rem;border:none;border-radius:8px;font-weight:700;cursor:pointer;}
+    form button:hover {background:#005ea0;}
+    footer {
+      text-align:center;background:#222;color:#ffd700;padding:1rem 2rem;font-weight:600;margin-top:3rem;
+    }
+    @media(max-width:768px) {
+      .sidebar {display:none;}
+      .main-content {margin:0;padding:1rem;}
+      #cartSidebar {width:100vw;right:-100vw;}
+      #cartSidebar.open {right:0;}
+    }
+  </style>
 </head>
 <body>
-<div class="sidebar" role="navigation" aria-label="Sidebar menu">
+<!-- Sidebar -->
+<div class="sidebar" role="navigation">
   <a href="#home" class="active">Home</a>
-  <a href="#all-products">All Products</a>
-  <a href="#skincare">Skin Care</a>
-  <a href="#aitools">AI Tools</a>
-  <a href="#digital-guides">Digital Guides</a>
-  <a href="#contact">Contact / About</a>
+  <a href="#shop">Shop</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
   <a href="#" id="openCartLink">Cart / Checkout</a>
 </div>
 
+<!-- Main Content -->
 <div class="main-content" role="main">
   <header>
-    <div class="logo" tabindex="0" role="banner">UBAID XCGPT STORE</div>
-    <button class="cart-btn" id="openCartBtn" aria-label="Open shopping cart">Cart (<span id="cartCount">0</span>)</button>
+    <div class="logo" tabindex="0">UBAID XCGPT STORE</div>
+    <button class="cart-btn" id="openCartBtn">Cart (<span id="cartCount">0</span>)</button>
   </header>
 
   <main>
     <section id="home">
       <h1>Welcome to UBAID XCGPT STORE</h1>
-      <p>Your one-stop shop for AI-powered digital products and guides. Explore our categories and deals!</p>
+      <p>Your one-stop shop for AI-powered digital products and guides. Explore below!</p>
     </section>
 
-    <section id="all-products">
-      <h2>Featured Products</h2>
+    <section id="shop">
+      <h2>Shop Products</h2>
       <div class="products-grid" id="productGrid"></div>
     </section>
 
-    <section id="contact" style="margin-top: 50px;">
-      <h2>Contact & About</h2>
-      <p><strong>Founder:</strong> Ubaid Rashid</p>
-      <p><strong>Contact Number:</strong> 9596131580</p>
-      <p><strong>Email:</strong> <a href="mailto:ubaidrashid756@gmail.com">ubaidrashid756@gmail.com</a></p>
-      <p><strong>Instagram:</strong> <a href="https://instagram.com/dar-ubaid756" target="_blank" rel="noopener">dar-ubaid756</a></p>
-      <p>We strive to provide quality AI-powered learning products at affordable prices, starting as low as ₹5.</p>
+    <section id="about" style="margin-top:40px;">
+      <h2>About</h2>
+      <p>Founded by <strong>Ubaid Rashid</strong>, UBAID XCGPT STORE provides digital AI guides and notes for students and tech learners globally.</p>
+      <ul>
+        <li>Contact: 9596131580</li>
+        <li>Email: ubaidrashid756@gmail.com</li>
+        <li>Instagram: <a href="https://instagram.com/dar-ubaid756" target="_blank">dar-ubaid756</a></li>
+      </ul>
+    </section>
+
+    <section id="contact" style="margin-top:40px;">
+      <h2>Customer Service & Contact</h2>
+      <form action="mailto:ubaidrashid756@gmail.com" method="post">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Message:</label>
+        <textarea name="message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="customer-service">
+        <h3>Frequently Asked Questions</h3>
+        <ul class="faq-list">
+          <li><b>How do I receive my digital product?</b> After checkout, you’ll see a "Download" button and receive a confirmation email.</li>
+          <li><b>Can I contact customer service?</b> Yes! Use the contact form above or email <strong>ubaidrashid756@gmail.com</strong> any time.</li>
+        </ul>
+      </div>
     </section>
   </main>
 
   <footer>© 2025 UBAID XCGPT STORE | Powered by UBAIDXCGPT</footer>
 </div>
 
+<!-- Cart Sidebar -->
 <div id="cartSidebar" aria-label="Shopping cart" role="dialog" aria-modal="true" aria-hidden="true">
   <button id="closeCartBtn" aria-label="Close cart sidebar">&times;</button>
   <h2>Your Cart</h2>
-  <div id="cartItems" aria-live="polite" aria-relevant="additions removals"></div>
+  <div id="cartItems" aria-live="polite"></div>
   <div id="cartTotal">Total: ₹0</div>
   <div id="paymentButtons">
-    <button id="upiPayBtn">Pay with UPI</button>
-    <button id="paypalPayBtn">Pay with PayPal</button>
+    <button id="simulatePayBtn">Simulate Checkout & Download</button>
   </div>
 </div>
 
 <script>
-  // Product Data with images (using placeholders)
+  // Single product definition
   const products = [
-    {id:1, name:"AI Notes & PDFs", category:"digital-guides", price:5, salePrice: 3, img:"https://via.pl.https://github.com/ubaid756/XUBAID/blob/bf5cef94ecfa3a3cc56b0d2eadb884d63f51a310/Step_by_Step_AI_Guides_for_Learners_by_Ubaid_Rashid.pdf=AI+Notes", desc:"Step-by-step AI guides for learners."},
-    {id:2, name:"Facial Harmony Guide", category:"skincare", price:20, salePrice:15, img:"https://via.placeholder.com/280x180?text=Facial+Harmony", desc:"Scientific self-improvement PDF, instant download."},
-    {id:3, name:"JKBOSE Digital Notes Class 9", category:"digital-guides", price:15, salePrice:15, img:"https://via.placeholder.com/280x180?text=JKBOSE+Class+9", desc:"Academic notes for Science, SST, English, Math."},
-    {id:4, name:"JKBOSE Digital Notes Class 10", category:"digital-guides", price:25, salePrice:20, img:"https://via.placeholder.com/280x180?text=JKBOSE+Class+10", desc:"Advanced notes for Science, SST, English, Math."},
-    {id:5, name:"Entrepreneurship eBooks", category:"digital-guides", price:50, salePrice:40, img:"https://via.placeholder.com/280x180?text=Entrepreneurship", desc:"Unlock a millionaire mindset."},
-    {id:6, name:"Exclusive Premium Course", category:"aitools", price:200, salePrice:200, img:"https://via.placeholder.com/280x180?text=Premium+Course", desc:"Coming soon - advanced entrepreneurial courses."}
+    {
+      id: 1,
+      name: "Step-by-step AI Guides for Learners",
+      category: "AI Guides",
+      price: 5,
+      salePrice: 3,
+      img: "file_000000008f106207acebdf84be1f903c.jpeg",
+      desc: "Comprehensive AI notes for beginners and students.",
+      downloadUrl: "Step_by_Step_AI_Guides_for_Learners_by_Ubaid_Rashid.pdf"
+    }
   ];
 
   let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-  // DOM References
+  // DOM references
   const productGrid = document.getElementById("productGrid");
   const cartCountSpan = document.getElementById("cartCount");
   const openCartBtn = document.getElementById("openCartBtn");
@@ -342,30 +216,26 @@
   const closeCartBtn = document.getElementById("closeCartBtn");
   const cartItemsDiv = document.getElementById("cartItems");
   const cartTotalDiv = document.getElementById("cartTotal");
-  const upiPayBtn = document.getElementById("upiPayBtn");
-  const paypalPayBtn = document.getElementById("paypalPayBtn");
+  const simulatePayBtn = document.getElementById("simulatePayBtn");
 
-  // Render products dynamically
+  // Render product card
   function renderProducts() {
-    productGrid.innerHTML = "";
-    products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `
+    productGrid.innerHTML = products.map(p => `
+      <div class="product-card">
         <img src="${p.img}" alt="${p.name}" class="product-img" />
-        <div class="category">${p.category.replace(/-/g, ' ').toUpperCase()}</div>
+        <div class="category">${p.category}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-desc">${p.desc}</div>
         <div class="price">₹${p.salePrice}<span class="old-price">${p.salePrice < p.price ? `₹${p.price}` : ''}</span></div>
         <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
-      `;
-      productGrid.appendChild(card);
-    });
+        <a href="${p.downloadUrl}" class="btn" download>View Sample</a>
+      </div>
+    `).join('');
   }
 
   // Cart operations
   function updateCartCount() {
-    const count = Object.values(cart).reduce((a,b) => a + b, 0);
+    const count = Object.values(cart).reduce((a, b) => a + b, 0);
     cartCountSpan.textContent = count;
   }
 
@@ -393,7 +263,6 @@
     for (const [id, qty] of Object.entries(cart)) {
       const product = products.find(p => p.id == id);
       if (product) {
-        const buy button = product.
         const price = product.salePrice;
         total += price * qty;
         const div = document.createElement("div");
@@ -429,30 +298,28 @@
     renderCart();
   }
 
-  // Simulate payment on button click
-  function simulatePayment(method) {
+  // Simulate payment
+  function simulatePayment() {
     if (Object.keys(cart).length === 0) {
       alert("Your cart is empty!");
       return;
     }
-    alert(`Thank you for your purchase via ${method}! Your order is confirmed.`);
-    cart = {};
+    let product = products[0];
+    cartItemsDiv.innerHTML = `<h3>Order Confirmed!</h3>
+      <p>Your order is placed. Click below to download your AI Guide.</p>
+      <a href="${product.downloadUrl}" class="btn" download>Download AI Guide PDF</a>`;
+    cartTotalDiv.textContent = "";
     localStorage.removeItem("cart");
     updateCartCount();
-    closeCart();
   }
 
   openCartBtn.addEventListener("click", openCart);
   openCartLink.addEventListener("click", e => {
-    e.preventDefault();
-    openCart();
+    e.preventDefault(); openCart();
   });
   closeCartBtn.addEventListener("click", closeCart);
+  simulatePayBtn.addEventListener("click", simulatePayment);
 
-  upiPayBtn.addEventListener("click", () => simulatePayment("UPI"));
-  paypalPayBtn.addEventListener("click", () => simulatePayment("PayPal"));
-
-  // Initial load
   renderProducts();
   updateCartCount();
 </script>
