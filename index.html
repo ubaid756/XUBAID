@@ -1,137 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UBAID XCGPT STORE</title>
-    <meta name="description" content="Amazon of Digital Knowledge: AI-powered notes, eBooks, JKBOSE courses. Instant online delivery." />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-    <style>
-        :root {
-            --royal-blue: #007bff;
-            --black: #111;
-            --white: #f8f9fa;
-            --gold: #FFD700;
-            --font-sans: 'Poppins', 'Inter', sans-serif;
-        }
-        body {
-            font-family: var(--font-sans);
-            margin: 0;
-            background: var(--white);
-            color: var(--black);
-        }
-        header {
-            background: var(--royal-blue);
-            color: var(--white);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--gold);
-        }
-        nav a {
-            color: var(--white);
-            margin: 0 1rem;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .tagline {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--royal-blue);
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-        .product-card {
-            background: var(--white);
-            border: 1px solid var(--royal-blue);
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px #007bff15;
-            padding: 1rem;
-            text-align: center;
-        }
-        .buy-btn {
-            background: var(--gold);
-            color: var(--black);
-            padding: 0.6rem 1.4rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            margin-top: 0.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .buy-btn:hover {
-            background: var(--royal-blue);
-            color: var(--white);
-        }
-        footer {
-            text-align: center;
-            background: var(--black);
-            color: var(--gold);
-            padding: 1rem;
-            font-weight: 700;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UBAID XCGPT STORE - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --royal-blue: #007bff;
+    --black: #111;
+    --white: #f8f9fa;
+    --gold: #FFD700;
+    --red: #d9534f;
+    --font-sans: 'Poppins', 'Inter', sans-serif;
+  }
+  body {
+    font-family: var(--font-sans);
+    margin: 0;
+    background: var(--white);
+    color: var(--black);
+    scroll-behavior: smooth;
+  }
+  header {
+    background: var(--royal-blue);
+    color: var(--white);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--gold);
+    cursor: pointer;
+  }
+  nav a {
+    color: var(--white);
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .flash-sale {
+    background: var(--red);
+    color: var(--white);
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--royal-blue);
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px #007bff15;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+  }
+  .product-card:hover {
+    box-shadow: 0 6px 15px #007bff40;
+  }
+  .sale-badge {
+    background: var(--red);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 0.7rem;
+  }
+  .old-price {
+    text-decoration: line-through;
+    color: gray;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+  .btn {
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .btn:hover {
+    background: var(--royal-blue);
+    color: var(--white);
+  }
+  footer {
+    text-align: center;
+    background: var(--black);
+    color: var(--gold);
+    padding: 1rem;
+    font-weight: 700;
+  }
+  #cartIcon {
+    cursor: pointer;
+    position: relative;
+  }
+  #cartCount {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--red);
+    border-radius: 50%;
+    color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="logo">UBAID ⚡ AI XCGPT STORE</div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#products">Products</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="#">🌐</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h1 class="tagline">Powered by AI, Designed for You.</h1>
-            <div class="products" id="products">
-                <div class="product-card">
-                    <h2>AI Notes & PDFs</h2>
-                    <p>Step-by-step Artificial Intelligence guides for learners.</p>
-                    <button class="buy-btn" onclick="window.location.href='upi://pay?pa=9596131580@fam'">Buy Now</button>
-                </div>
-                <div class="product-card">
-                    <h2>Facial Harmony Guide</h2>
-                    <p>Scientific self-improvement PDF, instant download.</p>
-                    <button class="buy-btn" onclick="window.location.href='upi://pay?pa=9596131580@fam'">Buy Now</button>
-                </div>
-                <div class="product-card">
-                    <h2>JKBOSE Digital Notes</h2>
-                    <p>Class 9 & 10 academic notes (Science, SST, English, Math).</p>
-                    <button class="buy-btn" onclick="window.location.href='upi://pay?pa=9596131580@fam'">Buy Now</button>
-                </div>
-                <div class="product-card">
-                    <h2>Entrepreneurship eBooks</h2>
-                    <p>Unlock a millionaire mindset, start building your business.</p>
-                    <button class="buy-btn" onclick="window.location.href='upi://pay?pa=9596131580@fam'">Buy Now</button>
-                </div>
-                <div class="product-card">
-                    <h2>Exclusive Premium Courses</h2>
-                    <p>Coming soon - advanced courses for entrepreneurs.</p>
-                    <button class="buy-btn" disabled>Coming Soon</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        UBAID XCGPT STORE © 2025 | Founder: Ubaid Rashid (Kashmir, India)
-    </footer>
+<header>
+  <div class="logo" onclick="location.href='index.html'">UBAID ⚡ XCGPT STORE</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="favorites.html">Favorites</a>
+    <a href="cart.html" id="cartIcon">Cart <span id="cartCount">0</span></a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+  <div class="flash-sale">Limited Time Flash Sale! Prices starting from ₹5</div>
+  <section class="products" id="productList"></section>
+</main>
+<footer>
+  UBAID XCGPT STORE © 2025 | Founder: Ubaid Rashid | Contact: 9596131580 | Email: ubaidrashid756@gmail.com
+</footer>
+<script>
+  // Sample product data
+  const products = [
+    { id: 1, name: "AI Notes & PDFs", desc: "Step-by-step AI guides for learners.", price: 5, sale: true, salePrice: 3 },
+    { id: 2, name: "Facial Harmony Guide", desc: "Scientific self-improvement PDF, instant download.", price: 20, sale: true, salePrice: 15 },
+    { id: 3, name: "JKBOSE Digital Notes Class 9", desc: "Academic notes for Science, SST, English, Math.", price: 15, sale: false, salePrice: 15 },
+    { id: 4, name: "JKBOSE Digital Notes Class 10", desc: "Advanced notes for Science, SST, English, Math.", price: 25, sale: true, salePrice: 20 },
+    { id: 5, name: "Entrepreneurship eBooks", desc: "Unlock a millionaire mindset.", price: 50, sale: true, salePrice: 40 },
+    { id: 6, name: "Exclusive Premium Course", desc: "Coming soon - advanced entrepreneurial courses.", price: 200, sale: false, salePrice: 200 }
+  ];
+
+  // Load products
+  const productList = document.getElementById("productList");
+  
+  function renderProducts() {
+    productList.innerHTML = "";
+    products.forEach(p => {
+      const saleBadge = p.sale ? '<div class="sale-badge">Sale</div>' : "";
+      const priceHTML = p.sale ? `<span>₹${p.salePrice}</span><span class="old-price">₹${p.price}</span>` : `₹${p.price}`;
+      
+      const card = document.createElement("article");
+      card.className = "product-card";
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <h2>${p.name}</h2>
+        <p>${p.desc}</p>
+        <div class="price">${priceHTML}</div>
+        ${saleBadge}
+        <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
+        <button class="btn" onclick="toggleFavorite(${p.id})" id="fav-btn-${p.id}">Add to Favorites</button>
+      `;
+      productList.appendChild(card);
+    });
+    updateFavoritesButtons();
+  }
+
+  // Cart handling using localStorage
+  function addToCart(productId) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    if(cart[productId]) {
+      cart[productId]++;
+    } else {
+      cart[productId] = 1;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert("Product added to cart!");
+  }
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let count = Object.values(cart).reduce((a,b) => a+b, 0);
+    document.getElementById("cartCount").textContent = count;
+  }
+
+  // Favorites handling using localStorage
+  function toggleFavorite(productId) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if(favorites.includes(productId)) {
+      favorites = favorites.filter(id => id !== productId);
+    } else {
+      favorites.push(productId);
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    updateFavoritesButtons();
+  }
+  function updateFavoritesButtons() {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    products.forEach(p => {
+      const btn = document.getElementById(`fav-btn-${p.id}`);
+      if(btn) {
+        btn.textContent = favorites.includes(p.id) ? "Remove Favorite" : "Add to Favorites";
+      }
+    });
+  }
+
+  // On page load
+  renderProducts();
+  updateCartCount();
+</script>
 </body>
 </html>
