@@ -323,7 +323,7 @@
 <script>
   // Product Data with images (using placeholders)
   const products = [
-    {id:1, name:"AI Notes & PDFs", category:"digital-guides", price:5, salePrice: 3, img:"https://via.placeholder.com/280x180?text=AI+Notes", desc:"Step-by-step AI guides for learners."},
+    {id:1, name:"AI Notes & PDFs", category:"digital-guides", price:5, salePrice: 3, img:"https://via.pl.https://github.com/ubaid756/XUBAID/blob/bf5cef94ecfa3a3cc56b0d2eadb884d63f51a310/Step_by_Step_AI_Guides_for_Learners_by_Ubaid_Rashid.pdf=AI+Notes", desc:"Step-by-step AI guides for learners."},
     {id:2, name:"Facial Harmony Guide", category:"skincare", price:20, salePrice:15, img:"https://via.placeholder.com/280x180?text=Facial+Harmony", desc:"Scientific self-improvement PDF, instant download."},
     {id:3, name:"JKBOSE Digital Notes Class 9", category:"digital-guides", price:15, salePrice:15, img:"https://via.placeholder.com/280x180?text=JKBOSE+Class+9", desc:"Academic notes for Science, SST, English, Math."},
     {id:4, name:"JKBOSE Digital Notes Class 10", category:"digital-guides", price:25, salePrice:20, img:"https://via.placeholder.com/280x180?text=JKBOSE+Class+10", desc:"Advanced notes for Science, SST, English, Math."},
@@ -393,6 +393,7 @@
     for (const [id, qty] of Object.entries(cart)) {
       const product = products.find(p => p.id == id);
       if (product) {
+        const buy button = product.
         const price = product.salePrice;
         total += price * qty;
         const div = document.createElement("div");
